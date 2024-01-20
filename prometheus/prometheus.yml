@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - follow_redirects: true
+      scheme: http
+      timeout: 10s
+      api_version: v2
+      static_configs:
+        - targets: [alertmanager:9093]
+
+rule_files:
+  - /etc/prometheus/alerts/rules.yaml
+
+scrape_configs:
+  - job_name: prometheus
+    metrics_path: /metrics
+    static_configs:
+      - targets: [localhost:9090]
+
+  - job_name: oracle
+    metrics_path: /metrics/general
+    relabel_configs:
+      - source_labels:
+          - valoper
+        target_label: __param_valoper
+    static_configs:
+      - targets:
+          - umee-oracle-exporter:9300
+        labels:
+          valoper: YOUR_VALIDATOR_ADDRESS
+          instance: YOUR_VALIDATOR_MONIKER
