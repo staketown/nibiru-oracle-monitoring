@@ -111,9 +111,9 @@ func Execute(cmd *cobra.Command, args []string) {
 
 func main() {
 	rootCmd.PersistentFlags().StringVar(&ConfigPath, "config", "", "Config file path")
-	rootCmd.PersistentFlags().Uint64Var(&BlockTime, "block-time", 5, "Block time in seconds")
+	rootCmd.PersistentFlags().Uint64Var(&BlockTime, "block-time", 3, "Block time in seconds")
 	rootCmd.PersistentFlags().StringVar(&ListenAddress, "listen-address", ":9300", "The address this exporter would listen on")
-	rootCmd.PersistentFlags().StringVar(&NodeAddress, "node", "nibiru.grpc.kjnodes.com:443", "RPC node address")
+	rootCmd.PersistentFlags().StringVar(&NodeAddress, "node", "localhost:9090", "gRPC node address")
 	rootCmd.PersistentFlags().StringVar(&LogLevel, "log-level", "info", "Logging level")
 	rootCmd.PersistentFlags().StringVar(&Prefix, "bech-prefix", "nibi", "Bech32 global prefix")
 

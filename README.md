@@ -1,5 +1,5 @@
-# Umee oracle monitoring
-This monitoring stack for umee network.
+# Nibiru oracle monitoring
+This monitoring stack for nibiru network.
 
 ## Prerequisites
 We recommend to deploy monitoring stack on different machine, it requires low server resources,
@@ -28,23 +28,23 @@ docker compose version
 ## Install monitoring stack
 - Clone repository with monitoring stack to the server and prepare .evn file
 ```bash
-git clone https://github.com/staketown/oracle-monitoring.git oracle-monitoring
-cp $HOME/oracle-monitoring/config/.env.example $HOME/oracle-monitoring/config/.env
+git clone https://github.com/staketown/nibiru-oracle-monitoring.git nibiru-oracle-monitoring
+cp $HOME/nibiru-oracle-monitoring/config/.env.example $HOME/nibiru-oracle-monitoring/config/.env
 ```
 - Update values in _.env_ file with your own
 ```bash
-nano $HOME/oracle-monitoring/config/.env
+nano $HOME/nibiru-oracle-monitoring/config/.env
 ```
 
-| KEY            | VALUE                                                                                                                                                                                                          |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| TELEGRAM_ADMIN | Your user id you can get from [@userinfobot](https://t.me/userinfobot). The bot will only reply to messages sent from the user. All other messages are dropped and logged on the bot's console                 |
+| KEY            | VALUE                                                                                                                                                                                                         |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| TELEGRAM_ADMIN | Your user id you can get from [@userinfobot](https://t.me/userinfobot). The bot will only reply to messages sent from the user. All other messages are dropped and logged on the bot's console                |
 | TELEGRAM_TOKEN | Your telegram bot access token you can get from [@botfather](https://telegram.me/botfather). To generate new token just follow a few simple steps described [here](https://core.telegram.org/bots#6-botfather) |
-| UMEE_GRPC      | Your umee's grpc endpoint                                                                                                                                                                                      |
+| NIBIRU_GRPC    | Your nibiru's grpc endpoint                                                                                                                                                                                   |
 
 - Export **.env** file values into **.bash_profile**
 ```bash
-echo "export $(xargs < $HOME/oracle-monitoring/config/.env)" >> $HOME/.bash_profile
+echo "export $(xargs < $HOME/nibiru-oracle-monitoring/config/.env)" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
 
@@ -56,8 +56,8 @@ sudo chmod a+x /usr/local/bin/yq
 
 - Replce **YOUR_VALOPER_ADDRESS** with you validator address value and execute command
 ```bash
-VALOPER=YOUR_VALOPER_ADDRESS yq -i '.scrape_configs[1].static_configs[0].labels.valoper = strenv(VALOPER)' ~/oracle-monitoring/prometheus/prometheus.yml
-MONIKER=YOUR_VALOPER_MONIKER yq -i '.scrape_configs[1].static_configs[0].labels.instance = strenv(MONIKER)' ~/oracle-monitoring/prometheus/prometheus.yml
+VALOPER=YOUR_VALOPER_ADDRESS yq -i '.scrape_configs[1].static_configs[0].labels.valoper = strenv(VALOPER)' ~/nibiru-oracle-monitoring/prometheus/prometheus.yml
+MONIKER=YOUR_VALOPER_MONIKER yq -i '.scrape_configs[1].static_configs[0].labels.instance = strenv(MONIKER)' ~/nibiru-oracle-monitoring/prometheus/prometheus.yml
 ```
 
 ### Support several validators
@@ -71,7 +71,7 @@ It should be looked like below:
 
 - Deploy the monitoring stack
 ```bash
-cd $HOME/oracle-monitoring && docker compose up -d
+cd $HOME/nibiru-oracle-monitoring && docker compose up -d
 ```
 
 ## Dashboard content
@@ -83,11 +83,11 @@ those are being retrieved and calculated over exporter
 
 ## Cleanup all container data
 ```bash
-cd $HOME/oracle-monitoring && docker compose down && docker volume prune -f
+cd $HOME/nibiru-oracle-monitoring && docker compose down && docker volume prune -f
 ```
 
 ## Reference list
-- Some logic taken from [umee oracle exporter by P-OPSTeam](https://github.com/P-OPSTeam/umee-oracle-exporter)
+
 - Stack of monitoring tools [node_tooling by Xiphiar](https://github.com/Xiphiar/node_tooling/)
 - Alert manager telegram bot [alertmanager-bot by metalmatze](https://github.com/metalmatze/alertmanager-bot)
 

@@ -65,7 +65,7 @@ services:
 
   oracle_exporter:
     build: .
-    container_name: umee-oracle-exporter
+    container_name: nibiru-oracle-exporter
     ports:
       - "9300:9300"
     restart: always
@@ -73,7 +73,7 @@ services:
       - FLASK_DEBUG=true
     networks:
       - oracle-monitoring
-    entrypoint: ["/usr/bin/oracle-exporter", "--node", "${UMEE_GRPC}"]
+    entrypoint: ["/usr/bin/oracle-exporter", "--node", "${NIBIRU_GRPC}"]
 
   alerta:
     image: alerta/alerta-web:latest

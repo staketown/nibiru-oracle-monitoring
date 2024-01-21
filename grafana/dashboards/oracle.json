@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,7 +42,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "assets misses",
+            "axisLabel": "pairs misses",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -121,12 +120,12 @@
           "format": "time_series",
           "instant": false,
           "interval": "5s",
-          "legendFormat": "{{asset}}",
+          "legendFormat": "{{pair}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Sum of Miss Assets Over Time (5m)",
+      "title": "Sum of Miss Pairs Over Time (5m)",
       "type": "timeseries"
     },
     {
@@ -478,7 +477,7 @@
           "editorMode": "code",
           "expr": "symbols_count{instance=\"$instance\"}",
           "hide": false,
-          "legendFormat": "symbols count",
+          "legendFormat": "pairs count",
           "range": true,
           "refId": "F"
         }
@@ -888,7 +887,7 @@
   "style": "dark",
   "tags": [
     "blockchain",
-    "umee"
+    "nibiru"
   ],
   "templating": {
     "list": [
@@ -925,8 +924,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Umee Oracle",
-  "uid": "",
-  "version": 11,
+  "title": "Nibiru Oracle Dashboard",
+  "version": 1,
   "weekStart": ""
 }

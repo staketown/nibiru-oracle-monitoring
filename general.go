@@ -104,7 +104,7 @@ func GeneralHandler(w http.ResponseWriter, r *http.Request, grpcConn *grpc.Clien
 			Help:        "Current aggregate vote for a given validator",
 			ConstLabels: ConstLabels,
 		},
-		[]string{"asset"},
+		[]string{"pair"},
 	)
 
 	validatorFeederAccountGauge := prometheus.NewGaugeVec(
@@ -208,8 +208,6 @@ func GeneralHandler(w http.ResponseWriter, r *http.Request, grpcConn *grpc.Clien
 		Float64("request-time", time.Since(slashWindowQueryStart).Seconds()).
 		Msg("Finished querying current slash window progress")
 
-	// (uint64(ctx.BlockHeight()) % params.SlashWindow) /
-	//			params.VotePeriod
 	generalWindowProgressGauge.Set(float64(windowProgress))
 
 	var wg sync.WaitGroup
@@ -371,18 +369,18 @@ func GeneralHandler(w http.ResponseWriter, r *http.Request, grpcConn *grpc.Clien
 			Float64("request-time", time.Since(queryStart).Seconds()).
 			Msg("Finished querying validator aggregate vote")
 
-		for _, asset := range oracleParamsResponse.Params.Whitelist {
+		for _, pair := range oracleParamsResponse.Params.Whitelist {
 			var isContains float64 = 1 // expected that is missed by default
 
 			for _, exchangeTuple := range response.AggregateVote.ExchangeRateTuples {
-				if strings.EqualFold(asset.String(), exchangeTuple.Pair.String()) {
+				if strings.EqualFold(pair.String(), exchangeTuple.Pair.String()) {
 					isContains = 0 // no misses
 					break
 				}
 			}
 
 			validatorAggregateVoteGauge.With(prometheus.Labels{
-				"asset": asset.String(),
+				"pair": pair.String(),
 			}).Set(isContains)
 		}
 	}()

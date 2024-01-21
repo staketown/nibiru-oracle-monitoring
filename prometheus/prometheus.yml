@@ -29,7 +29,7 @@ scrape_configs:
         target_label: __param_valoper
     static_configs:
       - targets:
-          - umee-oracle-exporter:9300
+          - nibiru-oracle-exporter:9300
         labels:
-          valoper: YOUR_VALIDATOR_ADDRESS
-          instance: YOUR_VALIDATOR_MONIKER
+          valoper: nibivaloper1cz36jg407s0z4f2vd7u6yc44v480dtpljrhdf6
+          instance: Nib Valoper
